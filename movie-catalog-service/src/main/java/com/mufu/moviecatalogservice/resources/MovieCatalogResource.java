@@ -3,6 +3,7 @@ package com.mufu.moviecatalogservice.resources;
 import com.mufu.moviecatalogservice.models.CatalogItem;
 import com.mufu.moviecatalogservice.models.Movie;
 import com.mufu.moviecatalogservice.models.Rating;
+import com.mufu.moviecatalogservice.models.UserRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,26 +23,17 @@ public class MovieCatalogResource {
     private RestTemplate restTemplate;
 
     @RequestMapping("/{userId}")
-    public List<CatalogItem> getCatalog(@PathVariable("userId") String userID) {
+    public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
-        List<Rating> ratings = Arrays.asList(
-            new Rating("1234", 4),
-            new Rating("5678", 3)
-        );
+        UserRating ratings = restTemplate.getForObject("http://localhost:8083/ratingsdata/users/" + userId, UserRating.class);
 
-        return ratings.stream().map(rating -> {
+        return ratings.getUserRating().stream().map(rating -> {
+            // for each movie ID, call movie info service and get details
             Movie movie = restTemplate.getForObject("http://localhost:8082/movies/" + rating.getMovieId(), Movie.class);
+            // put them all together
             return new CatalogItem(movie.getName(), "test movie desc", rating.getRating());
-
         })
         .collect(Collectors.toList());
-
-
-        // for each movie ID, call movie info service and get details
-
-        // put them all together
-
-
     }
 
 }
