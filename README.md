@@ -21,3 +21,5 @@ This application is build based on the microservices architecture. There are thr
 - **Ratings Data Service** - Stores user ratings and watched movie list. 
 - **Movie Info Service** - Request movie description from external API. 
 
+<img src="https://raw.githubusercontent.com/HanMufu/Movie-Ratings-Microservices/master/microservices.png" width="60%" height="60%">
+
