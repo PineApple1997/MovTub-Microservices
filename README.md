@@ -19,7 +19,12 @@ This application has been built using these technologies:
 - Spring Boot
 - Spring Cloud
 - Eureka
+- Spring Data JPA
+- MySQL
 - Vue.js
+
+This application will use:
+- Docker, to create, deploy and run
 
 ## Application Architecture
 This application is build based on the microservices architecture. There are three microservices now. 
