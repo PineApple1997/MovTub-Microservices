@@ -23,3 +23,8 @@ This application is build based on the microservices architecture. There are thr
 
 <img src="https://raw.githubusercontent.com/HanMufu/Movie-Ratings-Microservices/master/microservices.png" width="60%" height="60%">
 
+## TODO
+- Connect Douban by OAuth2.0, get users' rating
+- Implement frontend with Vue.js
+- Build a movie recommendation system
+
