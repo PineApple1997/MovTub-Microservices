@@ -22,7 +22,7 @@ Vue.use(VuePlyr, {
 
 Vue.prototype.$axios = axios.create({
   // baseURL: "http://172.30.229.132:8080",
-  baseURL: "",
+  baseURL: "http:",
 });
 
 new Vue({
