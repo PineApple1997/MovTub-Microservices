@@ -5,8 +5,17 @@
       <el-header>
 
         <el-row>
-          <el-col :span="6">MovTub</el-col>
-          <el-col :span="6"><el-button type="primary" icon="el-icon-search">搜索</el-button></el-col>
+          <el-col :span="2">MovTub</el-col>
+          <el-col :span="8" :offset="6">
+            <div>
+              <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+                <el-button slot="append" icon="el-icon-search"></el-button>
+              </el-input>
+            </div>
+          </el-col>
+          <el-col :span="2" :offset="6">
+            <el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          </el-col>
 
         </el-row>
         
@@ -58,13 +67,18 @@
         </el-aside>
         <el-main>
 
-
-          
-    
-          <el-card class="card" v-for="(item, $index) in list" :key="$index">
+          <!-- <el-card class="card" v-for="(item, $index) in list" :key="$index">
             Card {{ $index + 1 }}
           </el-card>
-          <infinite-loading @infinite="infiniteHandler"></infinite-loading>
+          <infinite-loading @infinite="infiniteHandler"></infinite-loading> -->
+
+          <div>
+            <p v-for="item in list" v-bind:key="item">
+            Line:
+            <span v-text="item"></span>
+            </p>
+            <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">    </infinite-loading>
+          </div>
 
         </el-main>
       </el-container>
@@ -78,6 +92,9 @@
 <script>
 
 import InfiniteLoading from 'vue-infinite-loading';
+// import axios from 'axios';
+
+const api = 'http://hn.algolia.com/api/v1/search_by_date?tags=story';
 
 export default {
   components: {
@@ -86,7 +103,10 @@ export default {
   name: 'Home',
   data() {
     return {
-      list: []
+      list: [], 
+      input3: '',
+      count: 0, 
+      page: 1, 
     };
   },
 
@@ -95,17 +115,39 @@ export default {
   }, 
 
   methods: {
-    infiniteHandler ($state) {
-      setTimeout(() => {
-        this.list.push('', '', '', '', '');
-        $state.loaded();
-      }, 2000);
+    infiniteHandler($state) {
+      this.$axios.get(api, {
+        params: {
+          page: this.page,
+        },
+      }).then(({ data }) => {
+        if (data.hits.length) {
+          this.page += 1;
+          this.list.push(...data.hits);
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      });
     }, 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    }, 
+    load () {
+        this.count += 5
+    }, 
+    onInfinite() {
+      setTimeout(() => {
+        const temp = [];
+        for (let i = this.list.length + 1; i <= this.list.length + 20; i++) {
+          temp.push(i);
+        }
+        this.list = this.list.concat(temp);
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+      }, 1000);
     }, 
   }
 }
@@ -177,5 +219,30 @@ export default {
     padding: 10px 0;
     background-color: #f9fafc;
   }
+
+  .el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }
+
+  .infinite-list {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: auto;
+  }
+
+  .infinite-list .infinite-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      background: #e8f3fe;
+      margin: 10px;
+      color: #7dbcfc;
+  } 
 
 </style>>
