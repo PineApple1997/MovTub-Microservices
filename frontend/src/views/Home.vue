@@ -67,19 +67,6 @@
         </el-aside>
         <el-main>
 
-          <!-- <el-card class="card" v-for="(item, $index) in list" :key="$index">
-            Card {{ $index + 1 }}
-          </el-card>
-          <infinite-loading @infinite="infiniteHandler"></infinite-loading> -->
-
-          <div>
-            <p v-for="item in list" v-bind:key="item">
-            Line:
-            <span v-text="item"></span>
-            </p>
-            <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">    </infinite-loading>
-          </div>
-
         </el-main>
       </el-container>
     </el-container>
@@ -89,16 +76,11 @@
   </div>
 </template>
 
+
+
 <script>
-
-import InfiniteLoading from 'vue-infinite-loading';
-// import axios from 'axios';
-
-const api = 'http://hn.algolia.com/api/v1/search_by_date?tags=story';
-
 export default {
   components: {
-    InfiniteLoading,
   },
   name: 'Home',
   data() {
@@ -115,21 +97,6 @@ export default {
   }, 
 
   methods: {
-    infiniteHandler($state) {
-      this.$axios.get(api, {
-        params: {
-          page: this.page,
-        },
-      }).then(({ data }) => {
-        if (data.hits.length) {
-          this.page += 1;
-          this.list.push(...data.hits);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      });
-    }, 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
