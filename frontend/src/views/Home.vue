@@ -3,9 +3,8 @@
 
     <el-container>
       <el-header>
-
         <el-row>
-          <el-col :span="2">MovTub</el-col>
+          <el-col :span="2" class="movtub">MovTub</el-col>
           <el-col :span="8" :offset="6">
             <div>
               <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
@@ -33,41 +32,44 @@
                 @close="handleClose">
                 <el-menu-item index="1">
                   <i class="el-icon-s-home"></i>
-                  <span slot="title">Home</span>
+                  <span slot="title" class="title">Home</span>
                 </el-menu-item>
                 <el-menu-item index="2">
                   <i class="el-icon-data-line"></i>
-                  <span slot="title">Trending</span>
+                  <span slot="title" class="title">Trending</span>
                 </el-menu-item>
                 <el-menu-item index="3">
                   <i class="el-icon-document"></i>
-                  <span slot="title">Subscriptions</span>
+                  <span slot="title" class="title">Subscriptions</span>
                 </el-menu-item>
                 <el-divider></el-divider>
                 <el-menu-item index="4">
                   <i class="el-icon-notebook-1"></i>
-                  <span slot="title">Library</span>
+                  <span slot="title" class="title">Library</span>
                 </el-menu-item>
                 <el-menu-item index="5">
                   <i class="el-icon-folder-opened"></i>
-                  <span slot="title">History</span>
+                  <span slot="title" class="title">History</span>
                 </el-menu-item>
                 <el-menu-item index="6">
                   <i class="el-icon-watch"></i>
-                  <span slot="title">Watch later</span>
+                  <span slot="title" class="title">Watch later</span>
                 </el-menu-item>
                 <el-menu-item index="7">
                   <i class="el-icon-star-off"></i>
-                  <span slot="title">Liked videos</span>
+                  <span slot="title" class="title">Liked videos</span>
                 </el-menu-item>
               </el-menu>
             </el-col>
           </el-row>
-          
         </el-aside>
-        <el-main>
 
+        <el-main>
+          <div class="video-player">
+            <VideoPlayer/>
+          </div>
         </el-main>
+
       </el-container>
     </el-container>
 
@@ -79,8 +81,10 @@
 
 
 <script>
+import VideoPlayer from '@/components/VideoPlayer.vue'
 export default {
   components: {
+    VideoPlayer
   },
   name: 'Home',
   data() {
@@ -127,21 +131,25 @@ export default {
 }
 
 .el-header, .el-footer {
-    background-color: #B3C0D1;
+    background-color: rgb(236, 239, 245);
     color: #333;
     text-align: center;
     line-height: 60px;
   }
   
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: rgb(236, 239, 245);
     color: #333;
     text-align: center;
     line-height: 200px;
   }
+
+  .el-menu-vertical-demo {
+    background-color: rgb(236, 239, 245);
+  }
   
   .el-main {
-    background-color: #E9EEF3;
+    background-color: rgb(241, 244, 247);
     color: #333;
     text-align: center;
     line-height: 160px;
@@ -211,5 +219,19 @@ export default {
       margin: 10px;
       color: #7dbcfc;
   } 
+
+  .video-player{
+      width: 100%;
+  }
+
+  .title{
+    font-family: "Helvetica Neue";
+  }
+
+  .movtub {
+    font-size:25px;
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+  }
 
 </style>>
