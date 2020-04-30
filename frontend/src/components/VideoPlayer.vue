@@ -8,8 +8,7 @@
               </div>
               <div class="thumbnail-info">
                 <h3>{{video.title}}</h3>
-                <p>{{video.creator}}</p>
-                <p class="thumbnail-views">{{video.views}} Views</p>
+                <p class="thumbnail-views" >{{video.genres}}</p>
               </div>
               <br>
           </li>
@@ -24,8 +23,9 @@ export default {
   data () {
     return {
       videos: [], 
-      urlGetVideos: '/videos', 
+      urlGetVideos: '/catalog/homepage', 
       epoch: 1, 
+      userId: 30, 
     }
   }, 
   methods: {
@@ -36,156 +36,16 @@ export default {
     getVideos() {
       this.$axios.get(this.urlGetVideos, {
           params: {
+            userId: this.userId, 
             epoch: this.epoch
           }
         }).then(res => {
-          this.videos = res.data.videos;
+          this.videos = res.data;
         });
     }
   }, 
   mounted: function() {
-    this.videos = [
-      {
-        id: 1,
-        title: "18-core iMac Pro Review: Not a Trap!",
-        genres: 'genres genres genres', 
-        embed_id: 'bTqVqk7FSmY', 
-        thumbnail:
-          "https://i.ytimg.com/vi/jn9mHzXJIV0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAvJvk4k_UNB9nst4pFP-txM1TLZA",
-        
-        creator: "Marques Brownlee",
-      },
-      {
-        id: 2,
-        title: "Dope Tech: Camera Robots!",
-        thumbnail:
-          "https://i.ytimg.com/vi/UIwdCN4dV6w/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDhlan32jHSvicGZezDFPjAOdXGUA",
-        youtubeURL: "https://www.youtube.com/embed/UIwdCN4dV6w",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      },
-      {
-        id: 3,
-        title: "Let's Talk About Tesla Roadster 2020!",
-        thumbnail:
-          "https://i.ytimg.com/vi/ctx4YBEdOxo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBDnlrC2rVwXamNkicEEbc3Mf4T0w",
-        youtubeURL: "https://www.youtube.com/embed/ctx4YBEdOxo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      },
-      {
-        id: 4,
-        title: "Talking Tech with Neil deGrasse Tyson!",
-        thumbnail:
-          "https://i.ytimg.com/vi/pqQrL1K0Z5g/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLA5hTiwkz4Tr1w1hSMhPlwtmQeyYw",
-        youtubeURL: "https://www.youtube.com/embed/pqQrL1K0Z5g",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      },
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }, 
-      {
-        id: 5,
-        title: "The Apple Ecosystem: Explained!",
-        thumbnail:
-          "https://i.ytimg.com/vi/KB4_WIPE7vo/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCCxXm7aoPShOwON74nhMlGYMUkHw",
-        youtubeURL: "https://www.youtube.com/embed/KB4_WIPE7vo",
-        creator: "Marques Brownlee",
-        likes: 0,
-        views: 0
-      }
-    ];
+    this.getVideos();
   }
 }
 </script>

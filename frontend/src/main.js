@@ -15,14 +15,14 @@ Vue.use(InfiniteLoading, { /* options */ });
 // The second argument is optional and sets the default config values for every player.
 Vue.use(VuePlyr, {
   plyr: {
-    fullscreen: { enabled: false }
+    fullscreen: { enabled: true }
   },
   emit: ['ended']
 })
 
 Vue.prototype.$axios = axios.create({
   // baseURL: "http://172.30.229.132:8080",
-  baseURL: "http://localhost:8080",
+  baseURL: "http://localhost:8081",
 });
 
 new Vue({
