@@ -25,14 +25,28 @@ export default {
       videos: [], 
       urlGetVideos: '/catalog/homepage', 
       epoch: 1, 
-      userId: 30, 
+      userId: this.userID,
     }
   }, 
+  props: {
+    userID: {
+      type: Number,
+      default: 1
+    }
+  },
+  watch: {
+    userID: function(userID) {
+      this.userId = userID;
+      this.getVideos();
+      console.log("watched: ", this.userId)
+    }
+  },
   methods: {
     chooseVideo(video){
         this.$router.push({name:'Watch',params:{v:video.embed_id, t:video.title}})
     }, 
     getVideos() {
+      console.log("call api: get userID", this.userId);
       this.$axios.get(this.urlGetVideos, {
           params: {
             userId: this.userId, 

@@ -14,7 +14,12 @@
               </el-input>
             </div>
           </el-col>
-          <el-col  class="avater" :span="2" :offset="5">
+          <el-col :span="4">
+            <el-button @click="changeUserID">
+              change user
+            </el-button>
+          </el-col>
+          <el-col  class="avater" :span="2">
             <el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
           </el-col>
 
@@ -68,7 +73,7 @@
 
         <el-main>
           <div class="video-player">
-            <VideoPlayer/>
+            <VideoPlayer :userID='userID'> </VideoPlayer>
           </div>
         </el-main>
 
@@ -95,6 +100,7 @@ export default {
       input3: '',
       count: 0, 
       page: 1, 
+      userID: 1,
     };
   },
 
@@ -111,7 +117,10 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    },  
+    },
+    changeUserID(){
+      this.userID = 1+ Math.floor(Math.random()*600);
+    }
   }
 }
 </script>
