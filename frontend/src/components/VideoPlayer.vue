@@ -30,8 +30,7 @@ export default {
   }, 
   methods: {
     chooseVideo(video){
-        //INCREASE THE VIDEOS VIEWS BY 1
-        video.views += 1;
+        this.$router.push({name:'Watch',params:{v:video.embed_id, t:video.title}})
     }, 
     getVideos() {
       this.$axios.get(this.urlGetVideos, {
@@ -44,23 +43,23 @@ export default {
         });
     }
   }, 
-  mounted: function() {
+  created: function() {
     this.getVideos();
   }
 }
 </script>
 
-<style scoped>
+<style>
   .thumbnail{
     display:flex;
     cursor: pointer;
-    line-height:110%;
+    line-height:150%;
   }
 
   .thumbnail img{
       width:368px;
       cursor: pointer;
-      line-height:110%;
+      line-height:150%;
   }
 
   .thumbnail-info{
@@ -71,19 +70,19 @@ export default {
   .thumbnail h3{
       font-size:16px;
       cursor: pointer;
-      line-height:110%;
+      line-height:150%;
   }
 
   h3,
   p{
       margin:0;
       padding:0;
-      line-height:110%;
+      line-height:150%;
   }
 
   .thumbnail-views{
       font-size:14px;
-      line-height:110%;
+      line-height:150%;
   }
 
   .video-player{
@@ -110,10 +109,12 @@ export default {
 
   .video-list ul {
 		width: 100%;
+    height: 99%;
 	}
 
 	.video-list li {
 		width: 24%;   /*如果显示三列 则width改为70px*/
+    height: 11%;
 		float: left;
 		display: block;
 	}

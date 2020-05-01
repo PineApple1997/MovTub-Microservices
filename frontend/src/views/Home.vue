@@ -4,7 +4,9 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :span="2" class="movtub">MovTub</el-col>
+          <el-col :span="2" class="movtub">
+            <p @click="backToHomePage()">MovTub</p>
+          </el-col>
           <el-col :span="8" :offset="6">
             <div>
               <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
@@ -12,7 +14,7 @@
               </el-input>
             </div>
           </el-col>
-          <el-col :span="2" :offset="6">
+          <el-col  class="avater" :span="2" :offset="5">
             <el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
           </el-col>
 
@@ -101,25 +103,15 @@ export default {
   }, 
 
   methods: {
+    backToHomePage() {
+      this.$router.go(0);
+    }, 
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    }, 
-    load () {
-        this.count += 5
-    }, 
-    onInfinite() {
-      setTimeout(() => {
-        const temp = [];
-        for (let i = this.list.length + 1; i <= this.list.length + 20; i++) {
-          temp.push(i);
-        }
-        this.list = this.list.concat(temp);
-        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-      }, 1000);
-    }, 
+    },  
   }
 }
 </script>
@@ -232,6 +224,12 @@ export default {
     font-size:25px;
     font-family: "Helvetica Neue";
     font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+  }
+
+  .avater {
+    cursor: pointer;
   }
 
 </style>>
