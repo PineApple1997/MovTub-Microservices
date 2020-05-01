@@ -15,9 +15,11 @@
             </div>
           </el-col>
           <el-col :span="4">
+            user id: {{userID}}
             <el-button @click="changeUserID">
               change user
             </el-button>
+            
           </el-col>
           <el-col  class="avater" :span="2">
             <el-avatar :size="60" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
